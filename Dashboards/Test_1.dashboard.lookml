@@ -1,4 +1,5 @@
-- dashboard: test_1
+---
+- dashboard: Test_1
   title: Test 1
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -49,6 +50,8 @@
     hidden_pivots: {}
     listen:
       Event Date: attributed_events_aggregate.date_date
+      Attributed Source: attributed_events_aggregate.attributed_source
+      Client ID: clients.client_id
     row: 0
     col: 0
     width: 11
@@ -119,6 +122,8 @@
     hidden_fields: [attributed_events_aggregate.total_vendor_quick_apply]
     listen:
       Event Date: attributed_events_aggregate.date_date
+      Attributed Source: attributed_events_aggregate.attributed_source
+      Client ID: clients.client_id
     row: 0
     col: 11
     width: 11
@@ -145,7 +150,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 8
     col: 5
     width: 5
@@ -174,7 +181,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 8
     col: 18
     width: 4
@@ -200,7 +209,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 8
     col: 0
     width: 5
@@ -227,7 +238,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 8
     col: 10
     width: 4
@@ -254,7 +267,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 8
     col: 14
     width: 4
@@ -282,7 +297,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 16
     col: 0
     width: 5
@@ -310,7 +327,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 16
     col: 5
     width: 5
@@ -337,7 +356,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 12
     col: 0
     width: 5
@@ -367,7 +388,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 12
     col: 18
     width: 4
@@ -395,7 +418,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 12
     col: 14
     width: 4
@@ -424,7 +449,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 20
     col: 0
     width: 5
@@ -452,7 +479,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 12
     col: 5
     width: 5
@@ -480,7 +509,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 12
     col: 10
     width: 4
@@ -509,7 +540,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen: {}
+    listen:
+      Attributed Source: job_performance.attributed_source
+      Client ID: clients.client_id
     row: 20
     col: 5
     width: 5
@@ -518,13 +551,42 @@
   - name: Event Date
     title: Event Date
     type: field_filter
-    default_value: 10 week ago for 10 week
+    default_value: 7 day
     allow_multiple_values: true
     required: false
     ui_config:
       type: relative_timeframes
       display: inline
+      options: []
     model: production_reporting_model
     explore: client_level_performance
     listens_to_filters: []
     field: attributed_events_aggregate.date_date
+  - name: Client ID
+    title: Client ID
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    model: production_reporting_model
+    explore: client_level_performance
+    listens_to_filters: []
+    field: clients.client_id
+  - name: Attributed Source
+    title: Attributed Source
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    model: production_reporting_model
+    explore: job_level_performance
+    listens_to_filters: [Client ID, Event Date]
+    field: job_performance.attributed_source
